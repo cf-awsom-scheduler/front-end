@@ -6,6 +6,10 @@ import { businessDays } from '../utils/businessDays';
 import { businessHours } from '../utils/businessHours';
 import { instruments } from '../utils/instruments';
 
+import validateEmail from '../utils/validateEmail';
+import validateZipCode from '../utils/validateZipCode';
+import validatePhone from '../utils/validatePhone';
+
 export default function RegisterPage() {
   async function handleSubmit(values) {
     console.log(values);
@@ -15,6 +19,7 @@ export default function RegisterPage() {
     // );
     // console.log(response);
   }
+
   return (
     <div>
       <Formik onSubmit={handleSubmit}>
@@ -25,44 +30,52 @@ export default function RegisterPage() {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting
+          isSubmitting,
           /* and other goodies */
         }) => (
           <Form>
             <div>
               <label>
                 <div>Name:</div>
-                <Field type="type" name="parentName" />
+                <Field type="type" name="parentName" required />
               </label>
             </div>
             <div>
               <label>
                 <div>E-mail:</div>
-                <Field type="email" name="email" />
+                <Field type="email" name="email" validate={validateEmail} />
+                {errors.email && touched.email && <div>{errors.email}</div>}
               </label>
             </div>
             <div>
               <label>
                 <div>Phone:</div>
-                <Field type="tel" name="phone" />
+                <Field
+                  type="tel"
+                  name="phone"
+                  validate={validatePhone}
+                  required
+                />
+                {errors.phone && touched.phone && <div>{errors.phone}</div>}
               </label>
             </div>
             <div>
               <label>
                 <div>Address:</div>
-                <Field type="text" name="address" />
+                <Field type="text" name="address" required />
               </label>
             </div>
             <div>
               <label>
                 <div>City:</div>
-                <Field type="text" name="city" />
+                <Field type="text" name="city" required />
               </label>
             </div>
             <div>
               <label>
                 <div>ZIP:</div>
-                <input type="number" name="zip" />
+                <Field type="number" name="zip" validate={validateZipCode} />
+                {errors.zip && touched.zip && <div>{errors.zip}</div>}
               </label>
             </div>
             <div>
@@ -80,7 +93,7 @@ export default function RegisterPage() {
             <div>
               <label>
                 <div>Instrument:</div>
-                <Field component="select" name="instruments">
+                <Field component="select" name="instruments" required>
                   <option default>Select an instrument</option>
                   {instruments.map(instrument => (
                     <option value={instrument}>{instrument}</option>
@@ -113,6 +126,7 @@ export default function RegisterPage() {
                               component="select"
                               name={`availability[${index}].day`}
                               className="app__form_dropdownbox"
+                              required
                             >
                               <option value="">Select</option>
                               {businessDays.map(element => (
@@ -152,7 +166,7 @@ export default function RegisterPage() {
                               className="btn"
                               onClick={() => remove(index)}
                             >
-                              <i className="far fa-times-circle" />
+                              ×
                             </button>
                             <ErrorMessage name={`availability[${index}].day`}>
                               {msg => <div className="field-error">{msg}</div>}
