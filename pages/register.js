@@ -1,12 +1,19 @@
 import React from 'react';
 import { Formik, Field, FieldArray, Form, ErrorMessage } from 'formik';
+import superagent from 'superagent';
+
+import { businessDays } from '../utils/businessDays';
+import { businessHours } from '../utils/businessHours';
+import { instruments } from '../utils/instruments';
 
 export default function RegisterPage() {
-  function handleSubmit(values, { setSubmitting }) {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
+  async function handleSubmit(values) {
+    console.log(values);
+    // const response = await superagent.post(
+    //   'http://localhost:3000/api/register',
+    //   JSON.stringify(values)
+    // );
+    // console.log(response);
   }
   return (
     <div>
@@ -21,7 +28,7 @@ export default function RegisterPage() {
           isSubmitting
           /* and other goodies */
         }) => (
-          <form onSubmit={handleSubmit}>
+          <Form>
             <div>
               <label>
                 Name:
@@ -73,11 +80,11 @@ export default function RegisterPage() {
             <div>
               <label>
                 Instrument:
-                <Field component="select">
-                  <option>Piano</option>
-                  <option>Voice</option>
-                  <option>Flute</option>
-                  <option>Others</option>
+                <Field component="select" name="instruments">
+                  <option default>Select an instrument</option>
+                  {instruments.map(instrument => (
+                    <option value={instrument}>{instrument}</option>
+                  ))}
                 </Field>
               </label>
             </div>
@@ -95,7 +102,87 @@ export default function RegisterPage() {
             <div>
               <label>
                 Availabilites:
-                <Field name="availabilities" />
+                <FieldArray name="availability">
+                  {({ push, remove }) => (
+                    <>
+                      {values.availability &&
+                        values.availability.length > 0 &&
+                        values.availability.map((item, index) => (
+                          <div key={index}>
+                            <Field
+                              component="select"
+                              name={`availability[${index}].day`}
+                              className="app__form_dropdownbox"
+                            >
+                              <option value="">Select</option>
+                              {businessDays.map(element => (
+                                <option key={element.id} value={element.day}>
+                                  {element.day.replace(/^\w/, c =>
+                                    c.toUpperCase()
+                                  )}
+                                </option>
+                              ))}
+                            </Field>
+                            <span />
+                            <Field
+                              component="select"
+                              name={`availability[${index}].fromTime`}
+                            >
+                              <option value="">From</option>
+                              {businessHours.map(element => (
+                                <option key={element.id} value={element.time}>
+                                  {element.label}
+                                </option>
+                              ))}
+                            </Field>
+                            <span />
+                            <Field
+                              component="select"
+                              name={`availability[${index}].toTime`}
+                            >
+                              <option value="">To</option>
+                              {businessHours.map(element => (
+                                <option key={element.id} value={element.time}>
+                                  {element.label}
+                                </option>
+                              ))}
+                            </Field>
+                            <button
+                              type="button"
+                              className="btn"
+                              onClick={() => remove(index)}
+                            >
+                              <i className="far fa-times-circle" />
+                            </button>
+                            <ErrorMessage name={`availability[${index}].day`}>
+                              {msg => <div className="field-error">{msg}</div>}
+                            </ErrorMessage>
+                            <ErrorMessage
+                              name={`availability[${index}].fromTime`}
+                            >
+                              {msg => <div className="field-error">{msg}</div>}
+                            </ErrorMessage>
+                            <ErrorMessage
+                              name={`availability[${index}].toTime`}
+                            >
+                              {msg => <div className="field-error">{msg}</div>}
+                            </ErrorMessage>
+                          </div>
+                        ))}
+                      <div className="app__form_container">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            push({ day: '', fromTime: '', toTime: '' })
+                          }
+                          className="btn btn-secondary"
+                        >
+                          Add Time
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </FieldArray>
               </label>
             </div>
 
@@ -130,7 +217,7 @@ export default function RegisterPage() {
             <button type="submit" disabled={isSubmitting}>
               Submit
             </button>
-          </form>
+          </Form>
         )}
       </Formik>
     </div>
