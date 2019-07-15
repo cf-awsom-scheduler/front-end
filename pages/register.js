@@ -31,55 +31,55 @@ export default function RegisterPage() {
           <Form>
             <div>
               <label>
-                Name:
+                <div>Name:</div>
                 <Field type="type" name="parentName" />
               </label>
             </div>
             <div>
               <label>
-                E-mail:
+                <div>E-mail:</div>
                 <Field type="email" name="email" />
               </label>
             </div>
             <div>
               <label>
-                Phone:
+                <div>Phone:</div>
                 <Field type="tel" name="phone" />
               </label>
             </div>
             <div>
               <label>
-                Address:
+                <div>Address:</div>
                 <Field type="text" name="address" />
               </label>
             </div>
             <div>
               <label>
-                City:
+                <div>City:</div>
                 <Field type="text" name="city" />
               </label>
             </div>
             <div>
               <label>
-                ZIP:
+                <div>ZIP:</div>
                 <input type="number" name="zip" />
               </label>
             </div>
             <div>
               <label>
-                Student Name(s):
+                <div>Student Name(s):</div>
                 <Field type="text" name="studentName" />
               </label>
             </div>
             <div>
               <label>
-                Birth Date:
+                <div>Birth Date:</div>
                 <Field type="date" name="birthDate" />
               </label>
             </div>
             <div>
               <label>
-                Instrument:
+                <div>Instrument:</div>
                 <Field component="select" name="instruments">
                   <option default>Select an instrument</option>
                   {instruments.map(instrument => (
@@ -90,7 +90,7 @@ export default function RegisterPage() {
             </div>
             <div>
               <label>
-                Do you have your instrument already?:
+                <div>Do you have your instrument already?:</div>
                 <Field component="select">
                   <option>yes</option>
                   <option>no</option>
@@ -101,7 +101,7 @@ export default function RegisterPage() {
 
             <div>
               <label>
-                Availabilites:
+                <div>Availabilites:</div>
                 <FieldArray name="availability">
                   {({ push, remove }) => (
                     <>
@@ -188,28 +188,28 @@ export default function RegisterPage() {
 
             <div>
               <label>
-                Any previous musical experience:
+                <div>Any previous musical experience:</div>
                 <Field component="textarea" name="previousExperience" />
               </label>
             </div>
 
             <div>
               <label>
-                Anything else you would like your teacher to know?:
+                <div>Anything else you would like your teacher to know?:</div>
                 <Field component="textarea" name="additionnalInfo" />
               </label>
             </div>
 
             <div>
               <label>
-                How did you hear about us?:
+                <div>How did you hear about us?:</div>
                 <Field name="referal" />
               </label>
             </div>
 
             <div>
               <label>
-                Offer Code:
+                <div>Offer Code:</div>
                 <Field name="offerCode" />
               </label>
             </div>
@@ -220,6 +220,12 @@ export default function RegisterPage() {
           </Form>
         )}
       </Formik>
+
+      <style jsx>{`
+        body {
+          font-family: sans-serif;
+        }
+      `}</style>
     </div>
   );
 }
