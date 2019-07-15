@@ -6,14 +6,14 @@ import { businessDays } from '../utils/businessDays';
 import { businessHours } from '../utils/businessHours';
 import { instruments } from '../utils/instruments';
 
+const BACK_END_SERVER_URI = process.env.BACK_END_SERVER_URI;
+
 export default function RegisterPage() {
   async function handleSubmit(values) {
-    console.log(values);
-    // const response = await superagent.post(
-    //   'http://localhost:3000/api/register',
-    //   JSON.stringify(values)
-    // );
-    // console.log(response);
+    const response = await superagent.post(
+      `${BACK_END_SERVER_URI}/register`,
+      JSON.stringify(values)
+    );
   }
   return (
     <div>
