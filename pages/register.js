@@ -91,10 +91,12 @@ export default function RegisterPage() {
             <div>
               <label>
                 <div>Do you have your instrument already?:</div>
-                <Field component="select">
-                  <option>yes</option>
-                  <option>no</option>
-                  <option>I need assistance in purchasing/renting</option>
+                <Field component="select" name="ownInstrument">
+                  <option value="true">yes</option>
+                  <option value="false">no</option>
+                  <option value="assistanceNeeded">
+                    I need assistance in purchasing/renting
+                  </option>
                 </Field>
               </label>
             </div>
