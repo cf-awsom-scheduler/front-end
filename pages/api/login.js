@@ -1,9 +1,8 @@
 const microAuthGoogle = require('microauth-google');
 
 const options = {
-  clientId:
-    '578766693804-bv1bnrm58m0icsg86ur3l3k2gc16deuf.apps.googleusercontent.com',
-  clientSecret: 'zgfsEGj-Z4R0yvVupzlMcDXU',
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
   callbackUrl: 'http://localhost:3000/login',
   path: '/api/login',
   scope: 'https://www.googleapis.com/auth/plus.me'
