@@ -1,8 +1,0 @@
-{
-  "version": 2,
-  "name": "front-end",
-  "builds": [{ "src": "next.config.js", "use": "@now/next" }],
-  "env": {
-    "BACK_END_SERVER_URI": "http://localhost:3000/api"
-  }
-}
