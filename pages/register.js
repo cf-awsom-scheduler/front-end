@@ -10,14 +10,14 @@ import validateEmail from '../utils/validateEmail';
 import validateZipCode from '../utils/validateZipCode';
 import validatePhone from '../utils/validatePhone';
 
+const BACK_END_SERVER_URI = process.env.BACK_END_SERVER_URI;
+
 export default function RegisterPage() {
   async function handleSubmit(values) {
-    console.log(values);
-    // const response = await superagent.post(
-    //   'http://localhost:3000/api/register',
-    //   JSON.stringify(values)
-    // );
-    // console.log(response);
+    const response = await superagent.post(
+      `${BACK_END_SERVER_URI}/register`,
+      JSON.stringify(values)
+    );
   }
 
   return (
@@ -31,7 +31,6 @@ export default function RegisterPage() {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          /* and other goodies */
         }) => (
           <Form>
             <div>
@@ -104,10 +103,12 @@ export default function RegisterPage() {
             <div>
               <label>
                 <div>Do you have your instrument already?:</div>
-                <Field component="select">
-                  <option>yes</option>
-                  <option>no</option>
-                  <option>I need assistance in purchasing/renting</option>
+                <Field component="select" name="ownInstrument">
+                  <option value="true">yes</option>
+                  <option value="false">no</option>
+                  <option value="assistanceNeeded">
+                    I need assistance in purchasing/renting
+                  </option>
                 </Field>
               </label>
             </div>
@@ -235,11 +236,7 @@ export default function RegisterPage() {
         )}
       </Formik>
 
-      <style jsx>{`
-        body {
-          font-family: sans-serif;
-        }
-      `}</style>
+      <style jsx>{``}</style>
     </div>
   );
 }
