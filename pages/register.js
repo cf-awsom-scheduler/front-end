@@ -43,7 +43,7 @@ export default function RegisterPage() {
               <label>
                 <div>E-mail:</div>
                 <Field type="email" name="email" validate={validateEmail} />
-                {errors.email && touched.email && <div>{errors.email}</div>}
+                <ErrorMessage name="email" />
               </label>
             </div>
             <div>
@@ -55,7 +55,7 @@ export default function RegisterPage() {
                   validate={validatePhone}
                   required
                 />
-                {errors.phone && touched.phone && <div>{errors.phone}</div>}
+                <ErrorMessage name="phone" />
               </label>
             </div>
             <div>
