@@ -223,11 +223,7 @@ export default function RegisterPage() {
         )}
       </Formik>
 
-      <style jsx>{`
-        body {
-          font-family: sans-serif;
-        }
-      `}</style>
+      <style jsx>{``}</style>
     </div>
   );
 }
