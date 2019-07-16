@@ -12,12 +12,16 @@ import validatePhone from '../utils/validatePhone';
 
 const BACK_END_SERVER_URI = process.env.BACK_END_SERVER_URI;
 
-export default function RegisterPage() {
+export default function TrialRequest() {
   async function handleSubmit(values) {
-    const response = await superagent.post(
-      `${BACK_END_SERVER_URI}/register`,
-      JSON.stringify(values)
-    );
+    try {
+      superagent
+        .post(`${BACK_END_SERVER_URI}/trialRequests`)
+        .set('Content-Type', 'application/json')
+        .send(JSON.stringify(values));
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -30,7 +34,7 @@ export default function RegisterPage() {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting,
+          isSubmitting
         }) => (
           <Form>
             <div>
@@ -68,6 +72,12 @@ export default function RegisterPage() {
               <label>
                 <div>City:</div>
                 <Field type="text" name="city" required />
+              </label>
+            </div>
+            <div>
+              <label>
+                <div>Region:</div>
+                <Field type="text" name="region" required />
               </label>
             </div>
             <div>
