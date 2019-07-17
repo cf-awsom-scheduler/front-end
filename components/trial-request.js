@@ -1,11 +1,23 @@
 import React from 'react';
+import Link from 'next/link';
 
-function TrialRequest({ studentName, instrument }) {
+function TrialRequest({ id, studentName, instrument }) {
   return (
-    <section>
-      <h2>{studentName}</h2>
-      {instrument}
-    </section>
+    <Link href={`request/${id}`}>
+      <section>
+        <h2>{studentName}</h2>
+        {instrument}
+        <style jsx>{`
+          section {
+            border: solid 1px black;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 16px;
+            cursor: pointer;
+          }
+        `}</style>
+      </section>
+    </Link>
   );
 }
 
