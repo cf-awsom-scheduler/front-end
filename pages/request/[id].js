@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import superagent from 'superagent';
 
 import Layout from '../../components/Layout';
@@ -12,6 +13,24 @@ function TrialRequestPage({
   zip,
   birthDate
 }) {
+  const router = useRouter();
+  const { id } = router.query;
+
+  function handleAccept() {
+    superagent
+      .patch(`${process.env.BACK_END_SERVER_URI}/trialRequests/${id}`)
+      .send({
+        teachers: 'current user'
+      });
+  }
+
+  function handleDecline() {
+    superagent
+      .patch(`${process.env.BACK_END_SERVER_URI}/trialRequests/${id}`)
+      .send({
+        declinedTeachers: 'current user'
+      });
+  }
   return (
     <Layout>
       <nav>
@@ -23,7 +42,11 @@ function TrialRequestPage({
       <div>{parentName}</div>
       <div>{instrument}</div>
       <div>{(address, city)}</div>
+      <button onClick={handleAccept}>Accept</button>
+      <button onClick={handleDecline}>Decline</button>
       <div>{birthDate}</div>
+      <section>Calendar</section>
+      <section>Map</section>
     </Layout>
   );
 }
