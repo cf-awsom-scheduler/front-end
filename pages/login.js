@@ -1,14 +1,13 @@
 import React from 'react';
+import superagent from 'superagent';
 
 function LoginPage(props) {
-  return <>{console.log(props)}</>;
+  return <>Login</>;
 }
 
-Requests.getInitialProps = async () => {
-  const response = await fetch('http://localhost:3000/api/login');
-  const requests = await response.json();
-
-  return { requests };
+LoginPage.getInitialProps = async () => {
+  const response = await superagent.get('http://localhost:3000/api/login');
+  return { response };
 };
 
-export default App;
+export default LoginPage;
