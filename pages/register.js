@@ -1,6 +1,5 @@
 import React from 'react';
 import { Formik, Field, FieldArray, Form, ErrorMessage } from 'formik';
-import styled from 'styled-components';
 import superagent from 'superagent';
 
 import { businessDays } from '../utils/businessDays';
@@ -37,213 +36,218 @@ export default function TrialRequest() {
           handleSubmit,
           isSubmitting,
         }) => (
-          <Form>
-            <div className="app__form">
-              <label>
-                <div>Parent Name:</div>
+          <Form style={formStyle}>
+            <h1>Free Trial Lesson</h1>
+            <div className="formField">
+              <label>Parent Name</label>
+              <Field
+                style={inputStyle}
+                type="type"
+                name="parentName"
+                required
+              />
+            </div>
+            <div className="formField">
+              <label>E-mail</label>
+              <Field
+                type="email"
+                name="email"
+                validate={validateEmail}
+                style={inputStyle}
+              />
+              <ErrorMessage name="email">
+                {msg => <div style={errorStyle}>{msg}</div>}
+              </ErrorMessage>
+            </div>
+            <div className="formField">
+              <label>Phone</label>
+              <Field
+                type="tel"
+                name="phone"
+                validate={validatePhone}
+                required
+                style={inputStyle}
+              />
+              <ErrorMessage name="phone">
+                {msg => <div style={errorStyle}>{msg}</div>}
+              </ErrorMessage>
+            </div>
+            <div className="formField">
+              <label>Address</label>
+              <Field type="text" name="address" required style={inputStyle} />
+            </div>
+            <div className="addressRowTwo">
+              <div className="formField">
+                <label>City</label>
+                <Field type="text" name="city" required style={inputStyle} />
+              </div>
+              <div className="formField">
+                <label>Region</label>
+                <Field type="text" name="region" required style={inputStyle} />
+              </div>
+              <div className="formField">
+                <label>Zip</label>
                 <Field
-                  className="input"
-                  type="type"
-                  name="parentName"
-                  required
-                  placeholder="First and Last"
+                  type="number"
+                  name="zip"
+                  validate={validateZipCode}
+                  style={inputStyle}
                 />
-              </label>
+                <ErrorMessage name="zip">
+                  {msg => <div style={errorStyle}>{msg}</div>}
+                </ErrorMessage>
+              </div>
             </div>
-            <div>
-              <label>
-                <div>E-mail:</div>
-                <Field type="email" name="email" validate={validateEmail} />
-                <ErrorMessage name="email" />
-              </label>
+            <div className="formField">
+              <label>Student Name(s)</label>
+              <Field type="text" name="studentName" style={inputStyle} />
             </div>
-            <div>
-              <label>
-                <div>Phone:</div>
-                <Field
-                  type="tel"
-                  name="phone"
-                  validate={validatePhone}
-                  required
-                />
-                <ErrorMessage name="phone" />
-              </label>
+            <div className="formField">
+              <label>Birth Date</label>
+              <Field type="date" name="birthDate" style={inputStyle} />
             </div>
-            <div>
-              <label>
-                <div>Address:</div>
-                <Field type="text" name="address" required />
-              </label>
+            <div className="formField">
+              <label>Instrument</label>
+              <Field
+                component="select"
+                name="instruments"
+                required
+                style={selectStyle}
+              >
+                <option default>Select an instrument</option>
+                {instruments.map(instrument => (
+                  <option value={instrument}>{instrument}</option>
+                ))}
+              </Field>
             </div>
-            <div>
-              <label>
-                <div>City:</div>
-                <Field type="text" name="city" required />
-              </label>
-            </div>
-            <div>
-              <label>
-                <div>Region:</div>
-                <Field type="text" name="region" required />
-              </label>
-            </div>
-            <div>
-              <label>
-                <div>ZIP:</div>
-                <Field type="number" name="zip" validate={validateZipCode} />
-                {errors.zip && touched.zip && <div>{errors.zip}</div>}
-              </label>
-            </div>
-            <div>
-              <label>
-                <div>Student Name(s):</div>
-                <Field type="text" name="studentName" />
-              </label>
-            </div>
-            <div>
-              <label>
-                <div>Birth Date:</div>
-                <Field type="date" name="birthDate" />
-              </label>
-            </div>
-            <div>
-              <label>
-                <div>Instrument:</div>
-                <Field component="select" name="instruments" required>
-                  <option default>Select an instrument</option>
-                  {instruments.map(instrument => (
-                    <option value={instrument}>{instrument}</option>
-                  ))}
-                </Field>
-              </label>
-            </div>
-            <div>
-              <label>
-                <div>Do you have your instrument already?:</div>
-                <Field component="select" name="ownInstrument">
-                  <option value="true">yes</option>
-                  <option value="false">no</option>
-                  <option value="assistanceNeeded">
-                    I need assistance in purchasing/renting
-                  </option>
-                </Field>
-              </label>
+            <div className="formField">
+              <label>Do you have your instrument already?</label>
+              <Field
+                component="select"
+                name="ownInstrument"
+                style={selectStyle}
+              >
+                <option value="true">yes</option>
+                <option value="false">no</option>
+                <option value="assistanceNeeded">
+                  I need assistance in purchasing/renting
+                </option>
+              </Field>
             </div>
 
-            <div>
-              <label>
-                <div>Availabilites:</div>
-                <FieldArray name="availability">
-                  {({ push, remove }) => (
-                    <>
-                      {values.availability &&
-                        values.availability.length > 0 &&
-                        values.availability.map((item, index) => (
-                          <div key={index}>
-                            <Field
-                              component="select"
-                              name={`availability[${index}].day`}
-                              className="app__form_dropdownbox"
-                              required
-                            >
-                              <option value="">Select</option>
-                              {businessDays.map(element => (
-                                <option key={element.id} value={element.day}>
-                                  {element.day.replace(/^\w/, c =>
-                                    c.toUpperCase()
-                                  )}
-                                </option>
-                              ))}
-                            </Field>
-                            <span />
-                            <Field
-                              component="select"
-                              name={`availability[${index}].fromTime`}
-                            >
-                              <option value="">From</option>
-                              {businessHours.map(element => (
-                                <option key={element.id} value={element.time}>
-                                  {element.label}
-                                </option>
-                              ))}
-                            </Field>
-                            <span />
-                            <Field
-                              component="select"
-                              name={`availability[${index}].toTime`}
-                            >
-                              <option value="">To</option>
-                              {businessHours.map(element => (
-                                <option key={element.id} value={element.time}>
-                                  {element.label}
-                                </option>
-                              ))}
-                            </Field>
-                            <button
-                              type="button"
-                              className="btn"
-                              onClick={() => remove(index)}
-                            >
-                              ×
-                            </button>
-                            <ErrorMessage name={`availability[${index}].day`}>
-                              {msg => <div className="field-error">{msg}</div>}
-                            </ErrorMessage>
-                            <ErrorMessage
-                              name={`availability[${index}].fromTime`}
-                            >
-                              {msg => <div className="field-error">{msg}</div>}
-                            </ErrorMessage>
-                            <ErrorMessage
-                              name={`availability[${index}].toTime`}
-                            >
-                              {msg => <div className="field-error">{msg}</div>}
-                            </ErrorMessage>
-                          </div>
-                        ))}
-                      <div className="app__form_container">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            push({ day: '', fromTime: '', toTime: '' })
-                          }
-                          className="btn btn-secondary"
-                        >
-                          Add Time
-                        </button>
-                      </div>
-                    </>
-                  )}
-                </FieldArray>
-              </label>
+            <div className="formField">
+              <label>Availabilites</label>
+              <FieldArray name="availability">
+                {({ push, remove }) => (
+                  <div className="availabilities">
+                    {values.availability &&
+                      values.availability.length > 0 &&
+                      values.availability.map((item, index) => (
+                        <div key={index}>
+                          <Field
+                            component="select"
+                            name={`availability[${index}].day`}
+                            className="app__form_dropdownbox"
+                            required
+                            style={selectStyle}
+                          >
+                            <option value="">Select</option>
+                            {businessDays.map(element => (
+                              <option key={element.id} value={element.day}>
+                                {element.day.replace(/^\w/, c =>
+                                  c.toUpperCase()
+                                )}
+                              </option>
+                            ))}
+                          </Field>
+                          <span />
+                          <Field
+                            component="select"
+                            name={`availability[${index}].fromTime`}
+                            style={selectStyle}
+                          >
+                            <option value="">From</option>
+                            {businessHours.map(element => (
+                              <option key={element.id} value={element.time}>
+                                {element.label}
+                              </option>
+                            ))}
+                          </Field>
+                          <span />
+                          <Field
+                            component="select"
+                            name={`availability[${index}].toTime`}
+                            style={selectStyle}
+                          >
+                            <option value="">To</option>
+                            {businessHours.map(element => (
+                              <option key={element.id} value={element.time}>
+                                {element.label}
+                              </option>
+                            ))}
+                          </Field>
+                          <button
+                            type="button"
+                            className="btn"
+                            onClick={() => remove(index)}
+                          >
+                            ×
+                          </button>
+                          <ErrorMessage name={`availability[${index}].day`}>
+                            {msg => <div className="field-error">{msg}</div>}
+                          </ErrorMessage>
+                          <ErrorMessage
+                            name={`availability[${index}].fromTime`}
+                          >
+                            {msg => <div className="field-error">{msg}</div>}
+                          </ErrorMessage>
+                          <ErrorMessage name={`availability[${index}].toTime`}>
+                            {msg => <div className="field-error">{msg}</div>}
+                          </ErrorMessage>
+                        </div>
+                      ))}
+                    <div className="app__form_container">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          push({ day: '', fromTime: '', toTime: '' })
+                        }
+                        className="btn btn-secondary"
+                      >
+                        Add Time
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </FieldArray>
             </div>
 
-            <div>
-              <label>
-                <div>Any previous musical experience:</div>
-                <Field component="textarea" name="previousExperience" />
-              </label>
+            <div className="formField">
+              <label>Any previous musical experience?</label>
+              <Field
+                component="textarea"
+                name="previousExperience"
+                style={inputStyle}
+              />
             </div>
 
-            <div>
-              <label>
-                <div>Anything else you would like your teacher to know?:</div>
-                <Field component="textarea" name="additionnalInfo" />
-              </label>
+            <div className="formField">
+              <label>Anything else you would like your teacher to know?</label>
+              <Field
+                component="textarea"
+                name="additionnalInfo"
+                style={inputStyle}
+              />
             </div>
 
-            <div>
-              <label>
-                <div>How did you hear about us?:</div>
-                <Field name="referal" />
-              </label>
+            <div className="formField">
+              <label>How did you hear about us?</label>
+              <Field name="referal" style={inputStyle} />
             </div>
 
-            <div>
-              <label>
-                <div>Offer Code:</div>
-                <Field name="offerCode" />
-              </label>
+            <div className="formField">
+              <label>Offer Code</label>
+              <Field name="offerCode" style={inputStyle} />
             </div>
 
             <button type="submit" disabled={isSubmitting}>
@@ -254,15 +258,65 @@ export default function TrialRequest() {
       </Formik>
 
       <style jsx>{`
-        background-color: #f9f9f9;
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|PT+Sans&display=swap');
         display: flex;
-        flex-dirction: column;
         justify-content: center;
+        font-family: 'Open Sans Condensed', sans-serif;
+        letter-spacing: 1.3px;
 
         label {
-          padding: 1em;
+          margin-bottom: 0.5em;
+          font-size: 1.2em;
+        }
+
+        .formField {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin-bottom: 0.8em;
+        }
+
+        .address {
+          border: none;
+        }
+
+        .addressRowTwo > div {
+          margin-right: 0.5em;
+          display: flex;
+          flex-direction: column;
+          justify-contnet: flex-start;
+          align-items: flex-start;
+        }
+
+        button {
+          height: 3em;
+          width: 7em;
+          font-size: 0.7em;
         }
       `}</style>
     </div>
   );
 }
+//styling for Formik components
+const inputStyle = {
+  fontSize: '1em',
+  padding: '.5em',
+  width: '90%',
+  marginBottom: '.8em',
+};
+
+const formStyle = {
+  width: '40%',
+};
+
+const errorStyle = {
+  color: 'red',
+};
+
+const selectStyle = {
+  height: '2.5em',
+  fontSize: '1em',
+  marginRight: '.8em',
+  marginTop: '.8em',
+  marginBottom: '.8em',
+};
