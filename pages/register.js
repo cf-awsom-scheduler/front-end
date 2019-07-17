@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Field, FieldArray, Form, ErrorMessage } from 'formik';
+import styled from 'styled-components';
 import superagent from 'superagent';
 
 import { businessDays } from '../utils/businessDays';
@@ -34,13 +35,19 @@ export default function TrialRequest() {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting
+          isSubmitting,
         }) => (
           <Form>
-            <div>
+            <div className="app__form">
               <label>
-                <div>Name:</div>
-                <Field type="type" name="parentName" required />
+                <div>Parent Name:</div>
+                <Field
+                  className="input"
+                  type="type"
+                  name="parentName"
+                  required
+                  placeholder="First and Last"
+                />
               </label>
             </div>
             <div>
@@ -246,7 +253,16 @@ export default function TrialRequest() {
         )}
       </Formik>
 
-      <style jsx>{``}</style>
+      <style jsx>{`
+        background-color: #f9f9f9;
+        display: flex;
+        flex-dirction: column;
+        justify-content: center;
+
+        label {
+          padding: 1em;
+        }
+      `}</style>
     </div>
   );
 }
