@@ -1,24 +1,22 @@
-const microAuthGoogle = require('microauth-google');
+import fetch from 'isomorphic-unfetch';
 
-const options = {
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  callbackUrl: 'http://localhost:3000/login',
-  path: '/api/login',
-  scope: 'https://www.googleapis.com/auth/plus.me'
+export default async (req, res) => {
+  const { username } = await req.body;
+  console.log('username', username);
+  const url = `https://api.github.com/users/${username}`;
+
+  try {
+    const response = await fetch(url);
+
+    if (response.ok) {
+      const { id } = await response.json();
+      return res.status(200).json({ token: id });
+    } else {
+      return res.status(response.status).send(response.statusText);
+    }
+  } catch ({ statusText, statusCode }) {
+    const err = new Error(statusText);
+    err.statusCode = statusCode;
+    return err;
+  }
 };
-
-const googleAuth = microAuthGoogle(options);
-
-export default googleAuth(async (req, res, auth) => {
-  if (!auth) {
-    req.body('not found');
-  }
-
-  if (auth.err) {
-    // Error handler
-    req.body('access denied');
-  }
-
-  req.json(auth);
-});
