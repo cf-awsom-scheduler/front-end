@@ -1,15 +1,16 @@
 import React from 'react';
 import superagent from 'superagent';
 
+import Layout from '../components/Layout';
 import TrialRequest from '../components/trial-request';
 
 function TrialRequestsPage({ trialRequests }) {
   return (
-    <>
+    <Layout>
       {trialRequests.map(trialRequest => (
-        <TrialRequest {...trialRequest} />
+        <TrialRequest key={trialRequest.id} {...trialRequest} />
       ))}
-    </>
+    </Layout>
   );
 }
 
@@ -20,4 +21,5 @@ TrialRequestsPage.getInitialProps = async () => {
 
   return { trialRequests: response.body };
 };
+
 export default TrialRequestsPage;
