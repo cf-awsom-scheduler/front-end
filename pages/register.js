@@ -139,7 +139,7 @@ export default function TrialRequest() {
               <label>Availabilites</label>
               <FieldArray name="availability">
                 {({ push, remove }) => (
-                  <div className="availabilities">
+                  <>
                     {values.availability &&
                       values.availability.length > 0 &&
                       values.availability.map((item, index) => (
@@ -190,6 +190,7 @@ export default function TrialRequest() {
                             type="button"
                             className="btn"
                             onClick={() => remove(index)}
+                            style={removeButtonStyle}
                           >
                             ×
                           </button>
@@ -217,7 +218,7 @@ export default function TrialRequest() {
                         Add Time
                       </button>
                     </div>
-                  </div>
+                  </>
                 )}
               </FieldArray>
             </div>
@@ -297,7 +298,7 @@ export default function TrialRequest() {
     </div>
   );
 }
-//styling for Formik components
+
 const inputStyle = {
   fontSize: '1em',
   padding: '.5em',
@@ -319,4 +320,12 @@ const selectStyle = {
   marginRight: '.8em',
   marginTop: '.8em',
   marginBottom: '.8em',
+};
+
+const removeButtonStyle = {
+  padding: '0',
+  border: 'none',
+  background: 'none',
+  width: '3em',
+  fontSize: '1em',
 };
