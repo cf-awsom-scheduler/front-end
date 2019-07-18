@@ -27,13 +27,6 @@ function TrialRequestPage({
     console.log(result);
   }
 
-  function handleDecline() {
-    superagent
-      .patch(`${process.env.BACK_END_SERVER_URI}/trialRequests/${id}`)
-      .send({
-        declinedTeachers: 'current user'
-      });
-  }
   return (
     <>
       <nav>
@@ -46,7 +39,6 @@ function TrialRequestPage({
       <div>{instrument}</div>
       <div>{(address, city)}</div>
       <button onClick={handleAccept}>Accept</button>
-      <button onClick={handleDecline}>Decline</button>
       <div>{birthDate}</div>
       <section>Calendar</section>
       <section>Map</section>
