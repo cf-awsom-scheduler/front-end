@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Field, FieldArray, Form, ErrorMessage } from 'formik';
+import Link from 'next/link';
 import superagent from 'superagent';
 
 import { businessDays } from '../utils/businessDays';
@@ -176,6 +177,7 @@ export default function TrialRequest() {
                             component="select"
                             name={`Availability[${index}].fromTime`}
                             style={selectStyle}
+                            required
                           >
                             <option value="">From</option>
                             {businessHours.map(element => (
@@ -189,6 +191,7 @@ export default function TrialRequest() {
                             component="select"
                             name={`Availability[${index}].toTime`}
                             style={selectStyle}
+                            required
                           >
                             <option value="">To</option>
                             {businessHours.map(element => (
@@ -247,8 +250,7 @@ export default function TrialRequest() {
               <label>Anything else you would like your teacher to know?</label>
               <Field component="textarea" name="Notes" style={inputStyle} />
             </div>
-
-            {/* <div className="formField">
+            <div className="formField">
               <label>How did you hear about us?</label>
               <Field name="Referral" style={inputStyle} />
             </div>
@@ -257,10 +259,11 @@ export default function TrialRequest() {
               <label>Offer Code</label>
               <Field name="OfferCode" style={inputStyle} />
             </div>
- */}
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
+            <Link href="/submission">
+              <button type="submit" disabled={isSubmitting}>
+                Submit
+              </button>
+            </Link>
           </Form>
         )}
       </Formik>
