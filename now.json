@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "front-end",
-  "builds": [{ "src": "package.json", "use": "@now/next" }],
+  "builds": [{ "src": "package.json", "use": "@now/node" }],
   "env": {
     "BACK_END_SERVER_URI": "https://awsom-backend-api.azurewebsites.net",
     "AUTH0_DOMAIN": "dev-aamb6gnu.auth0.com",
