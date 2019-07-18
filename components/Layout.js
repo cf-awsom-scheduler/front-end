@@ -5,9 +5,14 @@ export default function Layout(props) {
   return (
     <>
       <Nav />
-      {props.children}
+      <main>{props.children}</main>
       <style jsx global>
-        {``}
+        {`
+          main {
+            margin-left: 16px;
+            margin-right: 16px;
+          }
+        `}
       </style>
     </>
   );
