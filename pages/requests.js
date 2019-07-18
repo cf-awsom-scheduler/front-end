@@ -17,7 +17,9 @@ function TrialRequestsPage({ trialRequests }) {
 TrialRequestsPage.getInitialProps = async () => {
   const response = await superagent.get(
     `${process.env.BACK_END_SERVER_URI}/trialRequests`
-  );
+  )
+  .set('Authorization', `Bearer ${process.env.TOKEN}`);
+  console.log(response.body)
 
   return { trialRequests: response.body };
 };

@@ -16,12 +16,18 @@ function TrialRequestPage({
   const router = useRouter();
   const { id } = router.query;
 
-  function handleAccept() {
-    superagent
-      .patch(`${process.env.BACK_END_SERVER_URI}/trialRequests/${id}`)
-      .send({
-        teachers: 'current user'
-      });
+  async function handleAccept() {
+    const result = await superagent
+      .post(`${process.env.BACK_END_SERVER_URI}/trialRequests/select`)
+      .send(
+        JSON.stringify(
+          {
+            trialRequestId: id,
+            teacherId: '10002'
+          }
+      ))
+      .set('Authorization', `Bearer ${process.env.TOKEN}`);
+    console.log(result);
   }
 
   function handleDecline() {
@@ -54,7 +60,10 @@ function TrialRequestPage({
 TrialRequestPage.getInitialProps = async ({ query }) => {
   const response = await superagent.get(
     `${process.env.BACK_END_SERVER_URI}/trialRequests/${query.id}`
-  );
+  )
+  .set('Authorization', `Bearer ${process.env.TOKEN}`);
+
+  console.log(response.body);
 
   return { ...response.body };
 };
