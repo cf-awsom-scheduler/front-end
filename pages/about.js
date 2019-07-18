@@ -1,10 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
-import Layout from '../components/Layout';
 
 const About = () => (
-  <div>
-    <Layout />
+  <>
     <div className="devsContainer">
       <div>
         <div className="devContainer">
@@ -66,7 +63,6 @@ const About = () => (
       p {
         width: 60%;
       }
-      background-color: #aadbff;
       h1 {
         margin-bottom: 2em;
       }
@@ -75,7 +71,7 @@ const About = () => (
         border-radius: 1em;
       }
     `}</style>
-  </div>
+  </>
 );
 
 export default About;
