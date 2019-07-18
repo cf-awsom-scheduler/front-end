@@ -4,6 +4,7 @@ import superagent from 'superagent';
 
 import validateZipCode from '../utils/validateZipCode';
 import { instruments } from '../utils/instruments';
+import { whileStatement } from '@babel/types';
 
 // const BACK_END_SERVER_URI = 'http://localhost:3000/api';
 const BACK_END_SERVER_URI = process.env.BACK_END_SERVER_URI;
@@ -51,7 +52,7 @@ export default function SignUp() {
           handleSubmit,
           isSubmitting,
         }) => (
-          <Form>
+          <Form style={formStyle}>
             <h1>Sign Up</h1>
             <div className="formField">
               <label>Name</label>
@@ -91,11 +92,21 @@ export default function SignUp() {
             <div className="addressRowTwo">
               <div className="formField">
                 <label>City</label>
-                <Field type="text" name="city" required style={inputStyle} />
+                <Field
+                  type="text"
+                  name="city"
+                  required
+                  style={addressInputStyle}
+                />
               </div>
               <div className="formField">
                 <label>Region</label>
-                <Field type="text" name="region" required style={inputStyle} />
+                <Field
+                  type="text"
+                  name="region"
+                  required
+                  style={addressInputStyle}
+                />
               </div>
               <div className="formField">
                 <label>Zip</label>
@@ -103,7 +114,7 @@ export default function SignUp() {
                   type="number"
                   name="zip"
                   validate={validateZipCode}
-                  style={inputStyle}
+                  style={addressInputStyle}
                 />
                 <ErrorMessage name="zip">
                   {msg => <div style={errorStyle}>{msg}</div>}
@@ -167,7 +178,7 @@ export default function SignUp() {
               </FieldArray>
             </div>
 
-            <button type="submit" disabled={isSubmitting}>
+            <button type="submit" disabled={isSubmitting} className="submit">
               Submit
             </button>
           </Form>
@@ -180,6 +191,7 @@ export default function SignUp() {
         justify-content: center;
         font-family: 'Open Sans Condensed', sans-serif;
         letter-spacing: 1.3px;
+        // background-color: #aadbff;
 
         label {
           margin-bottom: 0.5em;
@@ -209,6 +221,15 @@ export default function SignUp() {
           height: 3em;
           width: 7em;
           font-size: 0.7em;
+          background-color: white;
+        }
+
+        .submit {
+          margin: auto;
+          width: 10em;
+          height: 3em;
+          font-size: 1em;
+          margin-bottom: 10em;
         }
       `}</style>
     </div>
@@ -218,12 +239,21 @@ export default function SignUp() {
 const inputStyle = {
   fontSize: '1em',
   padding: '.5em',
+  width: '95%',
+  marginBottom: '.8em',
+};
+
+const addressInputStyle = {
+  fontSize: '1em',
+  padding: '.5em',
   width: '90%',
   marginBottom: '.8em',
 };
 
 const formStyle = {
-  width: '40%',
+  marginTop: '5%',
+  width: '30%',
+  height: '70%',
 };
 
 const selectStyle = {
@@ -240,4 +270,8 @@ const removeButtonStyle = {
   background: 'none',
   width: '3em',
   fontSize: '1em',
+};
+
+const errorStyle = {
+  color: 'red',
 };
