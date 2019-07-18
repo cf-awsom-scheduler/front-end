@@ -3,7 +3,6 @@ const express = require('express');
 const http = require('http');
 const next = require('next');
 const session = require('express-session');
-// 1 - importing dependencies
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const uid = require('uid-safe');
@@ -18,7 +17,6 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
 
-  // 2 - add session management to Express
   const sessionConfig = {
     secret: uid.sync(18),
     cookie: {
@@ -29,7 +27,6 @@ app.prepare().then(() => {
   };
   server.use(session(sessionConfig));
 
-  // 3 - configuring Auth0Strategy
   const auth0Strategy = new Auth0Strategy(
     {
       domain: process.env.AUTH0_DOMAIN,
@@ -42,26 +39,23 @@ app.prepare().then(() => {
     }
   );
 
-  // 4 - configuring Passport
   passport.use(auth0Strategy);
   passport.serializeUser((user, done) => done(null, user));
   passport.deserializeUser((user, done) => done(null, user));
 
-  // 5 - adding Passport and authentication routes
   server.use(passport.initialize());
   server.use(passport.session());
   server.use(authRoutes);
 
-  // 6 - you are restricting access to some routes
   const restrictAccess = (req, res, next) => {
     if (!req.isAuthenticated()) return res.redirect('/login');
     next();
   };
 
   server.use('/profile', restrictAccess);
-  server.use('/', restrictAccess);
+  server.use('/requests', restrictAccess);
+  server.use('/request/*', restrictAccess);
 
-  // handling everything else with Next.js
   server.get('*', handle);
 
   http.createServer(server).listen(process.env.PORT, () => {
