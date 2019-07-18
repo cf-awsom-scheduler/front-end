@@ -52,17 +52,6 @@ const About = () => (
       </div>
     </div>
     <style jsx>{`
-      @media (min-width: 900px) {
-        .devsContainer {
-          display: flex;
-          flex-direction: column;
-        }
-        .devContainer {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-      }
       .devsContainer {
         display: flex;
         flex-direction: column;
