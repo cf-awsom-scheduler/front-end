@@ -18,6 +18,11 @@ const Nav = ({ user }) => (
             </Link>
           </li>
           <li>
+            <Link prefetch href="/about">
+              <a>About</a>
+            </Link>
+          </li>
+          <li>
             <Link href="/logout">
               <a className="nav-link">Log Out</a>
             </Link>
