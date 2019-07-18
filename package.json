@@ -1,9 +1,9 @@
 {
-  "name": "create-next-example-app",
+  "name": "cf-awsom-scheduler-front-end",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "test": "jest --coverage --verbose"
   },
   "dependencies": {
@@ -12,15 +12,20 @@
     "babel-jest": "^24.8.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.7.0",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
     "formik": "^1.5.8",
-    "jest": "^24.8.0",
     "next": "^9.0.1",
+    "next-cookies": "^1.1.2",
+    "passport": "^0.4.0",
+    "passport-auth0": "^1.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "styled-components": "^4.3.2",
-    "superagent": "^5.1.0"
+    "superagent": "^5.1.0",
+    "uid-safe": "^2.1.5"
   },
   "devDependencies": {
     "jest": "^24.8.0"
