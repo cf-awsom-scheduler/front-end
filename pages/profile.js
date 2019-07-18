@@ -1,6 +1,6 @@
 function Profile({ user }) {
   return (
-    <div>
+    <>
       <h2>
         <div src={user.picture} alt={user.displayName} /> Hello,{' '}
         {user.displayName}
@@ -13,7 +13,7 @@ function Profile({ user }) {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }
 
