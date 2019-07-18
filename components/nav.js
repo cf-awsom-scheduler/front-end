@@ -1,21 +1,48 @@
-import React from 'react'
-import Link from 'next/link'
+import React from 'react';
+import Link from 'next/link';
 
 const links = [
   { href: 'https://github.com/segmentio/create-next-app', label: 'Github' }
 ].map(link => {
-  link.key = `nav-link-${link.href}-${link.label}`
-  return link
-})
+  link.key = `nav-link-${link.href}-${link.label}`;
+  return link;
+});
 
-const Nav = () => (
+const Nav = ({ user }) => (
   <nav>
     <ul>
-      <li>
-        <Link prefetch href="/">
-          <a>Home</a>
-        </Link>
-      </li>
+      {console.log(user)}
+      {user ? (
+        <>
+          <li>
+            <Link prefetch href="/">
+              <a>Home</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/requests">
+              <a>Requests</a>
+            </Link>
+          </li>
+          <li>
+            <Link prefetch href="/profile">
+              <a>Profile</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/logout">
+              <a className="nav-link">Log Out</a>
+            </Link>
+          </li>
+        </>
+      ) : (
+        <li>
+          <Link href="/login">
+            <a className="nav-link">Log In</a>
+          </Link>
+        </li>
+      )}
+
       <ul>
         {links.map(({ key, href, label }) => (
           <li key={key}>
@@ -54,6 +81,6 @@ const Nav = () => (
       }
     `}</style>
   </nav>
-)
+);
 
-export default Nav
+export default Nav;
