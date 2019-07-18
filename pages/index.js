@@ -1,10 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from '../components/head';
-import Layout from '../components/Layout';
 
 const Home = () => (
-  <Layout>
+  <>
     <Head title="Home" />
 
     <div className="hero">
@@ -84,7 +83,7 @@ const Home = () => (
         color: #333;
       }
     `}</style>
-  </Layout>
+  </>
 );
 
 export default Home;
