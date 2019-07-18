@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 function TrialRequest({ id, studentName, instrument }) {
   return (
-    <Link href={`request/${id}`}>
+    <Link href="request/[id]" as={`/request/${id}`}>
       <section>
         <h2>{studentName}</h2>
         {instrument}
