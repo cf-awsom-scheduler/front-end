@@ -2,8 +2,6 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import superagent from 'superagent';
 
-import Layout from '../../components/Layout';
-
 function TrialRequestPage({
   studentName,
   parentName,
@@ -20,12 +18,11 @@ function TrialRequestPage({
     const result = await superagent
       .post(`${process.env.BACK_END_SERVER_URI}/trialRequests/select`)
       .send(
-        JSON.stringify(
-          {
-            trialRequestId: id,
-            teacherId: '10002'
-          }
-      ))
+        JSON.stringify({
+          trialRequestId: id,
+          teacherId: '10002'
+        })
+      )
       .set('Authorization', `Bearer ${process.env.TOKEN}`);
     console.log(result);
   }
@@ -38,7 +35,7 @@ function TrialRequestPage({
       });
   }
   return (
-    <Layout>
+    <>
       <nav>
         <ul>
           <li>Requests</li>
@@ -53,15 +50,14 @@ function TrialRequestPage({
       <div>{birthDate}</div>
       <section>Calendar</section>
       <section>Map</section>
-    </Layout>
+    </>
   );
 }
 
 TrialRequestPage.getInitialProps = async ({ query }) => {
-  const response = await superagent.get(
-    `${process.env.BACK_END_SERVER_URI}/trialRequests/${query.id}`
-  )
-  .set('Authorization', `Bearer ${process.env.TOKEN}`);
+  const response = await superagent
+    .get(`${process.env.BACK_END_SERVER_URI}/trialRequests/${query.id}`)
+    .set('Authorization', `Bearer ${process.env.TOKEN}`);
 
   console.log(response.body);
 
