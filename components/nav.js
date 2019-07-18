@@ -8,11 +8,6 @@ const Nav = ({ user }) => (
       {user ? (
         <>
           <li>
-            <Link prefetch href="/">
-              <a>Home</a>
-            </Link>
-          </li>
-          <li>
             <Link href="/requests">
               <a>Requests</a>
             </Link>
