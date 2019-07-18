@@ -52,9 +52,10 @@ app.prepare().then(() => {
     next();
   };
 
-  server.use('/profile', restrictAccess);
+  server.use('/', restrictAccess);
   server.use('/requests', restrictAccess);
   server.use('/request/*', restrictAccess);
+  server.use('/profile', restrictAccess);
 
   server.get('*', handle);
 
