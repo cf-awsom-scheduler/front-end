@@ -1,5 +1,6 @@
 import React from 'react';
 import App, { Container as NextContainer } from 'next/app';
+import Nav from '../components/nav';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -30,6 +31,7 @@ class MyApp extends App {
 
     return (
       <NextContainer>
+        <Nav user={this.state.user} />
         <Component {...props} />
       </NextContainer>
     );
