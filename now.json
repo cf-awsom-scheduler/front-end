@@ -3,6 +3,7 @@
   "name": "front-end",
   "builds": [{ "src": "package.json", "use": "@now/next" }],
   "env": {
+    "BACK_END_SERVER_URI": "https://awsom-backend-api.azurewebsites.net",
     "AUTH0_DOMAIN": "dev-aamb6gnu.auth0.com",
     "AUTH0_CLIENT_ID": "EWnN9XUDCEPCPiSyFAJTPsee22HdIj4V",
     "AUTH0_CALLBACK_URL": "https://front-end-git-feature-auth.cf-awsom-scheduler.now.sh/callback",
