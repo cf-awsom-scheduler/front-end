@@ -1,6 +1,7 @@
 import React from 'react';
 import App, { Container as NextContainer } from 'next/app';
 import Nav from '../components/nav';
+import '../styles/index.css';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
