@@ -7,7 +7,14 @@ import TrialRequest from '../components/trial-request';
 function TrialRequestsPage({ trialRequests }) {
   return (
     <Container>
-      <div class="flex md:flex-row flex-col px-4">
+      <img
+        src="/static/assets/images/kids.png "
+        class="md:w-3/4 w-full mx-auto mb-10 "
+      />
+      <h1 class="font-mono text-3xl text-center mb-10 tracking-wider">
+        New Student Requests
+      </h1>
+      <div class="flex md:flex-row flex-col flex-wrap">
         {trialRequests.map(trialRequest => (
           <TrialRequest key={trialRequest.id} {...trialRequest} />
         ))}

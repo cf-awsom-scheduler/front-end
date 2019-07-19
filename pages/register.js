@@ -140,7 +140,7 @@ export default function TrialRequest() {
                 name="Instrument"
                 list="instruments"
                 required
-                style={selectStyle}
+                style={inputStyle}
               />
               <datalist id="instruments">
                 {instruments.map(instrument => (
@@ -320,6 +320,11 @@ export default function TrialRequest() {
           height: 3em;
           width: 7em;
           font-size: 0.7em;
+          border: solid 1px black;
+        }
+
+        h1 {
+          font-size: 2em;
         }
       `}</style>
     </div>
@@ -331,6 +336,7 @@ const inputStyle = {
   padding: '.5em',
   width: '90%',
   marginBottom: '.8em',
+  border: '1px solid black',
 };
 
 const formStyle = {

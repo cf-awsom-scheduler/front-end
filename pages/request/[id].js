@@ -18,6 +18,7 @@ function TrialRequestPage({
   studentBirthDate,
   notes,
   experience,
+  availability,
 }) {
   const [latLong, setLatLong] = useState([]);
 
@@ -39,6 +40,7 @@ function TrialRequestPage({
   const { id } = router.query;
 
   const [accepted, setAccepted] = useState(false);
+
   const age = moment().diff(studentBirthDate, 'years');
 
   async function handleAccept() {
@@ -57,46 +59,56 @@ function TrialRequestPage({
 
   return (
     <Container>
-      <h1 class="text-3xl">{studentName}</h1>
-      <div>{instrument}</div>
-      <div>{(address, city)}</div>
-      <div>{age} years old</div>
-      <section>
-        {latLong[0] && latLong[1] ? (
-          <ReactMapGL
-            mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
-            width="100%"
-            height="280px"
-            latitude={latLong[1]}
-            longitude={latLong[0]}
-            zoom={8}
-            mapStyle="mapbox://styles/mapbox/streets-v11"
-          >
-            <Marker
+      {/* <h1>{availability}</h1> */}
+      <h1 class="text-3xl text-center font-bold tracking-wider mb-10 font-mono tracking-wider">
+        {studentName}
+      </h1>
+      <div class="flex justify-around mb-10">
+        <section class="w-1/2 mr-10">
+          {latLong[0] && latLong[1] ? (
+            <ReactMapGL
+              mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
+              width="100%"
+              height="350px"
               latitude={latLong[1]}
               longitude={latLong[0]}
-              offsetLeft={-10}
-              offsetTop={-10}
+              zoom={10}
+              mapStyle="mapbox://styles/mapbox/streets-v11"
             >
-              <Pin size={20} />
-            </Marker>
-          </ReactMapGL>
-        ) : null}
-      </section>
-      <div>
-        <h3>Experience:</h3>
-        <p>{experience}</p>
-      </div>
-      <div>
-        <h3>Notes:</h3>
-        <p>{notes}</p>
+              <Marker
+                latitude={latLong[1]}
+                longitude={latLong[0]}
+                offsetLeft={-10}
+                offsetTop={-10}
+              >
+                <Pin size={20} />
+              </Marker>
+            </ReactMapGL>
+          ) : null}
+        </section>
+
+        <div class="flex flex-col justify-around mb-10 mr-10">
+          <div class="border-2 p-3  md:w-40 text-center">{city}</div>
+          <div class="border-2 p-3  md:w-40 text-center">{instrument}</div>
+          <div class="border-2 p-3  md:w-40 text-center">{age} years old</div>
+        </div>
+        <div class="flex flex-col justify-around">
+          <div>
+            <h3 class="mb-5 text-xl text-center">Experience:</h3>
+            <p class="border-2 p-5 ">{experience}</p>
+          </div>
+          <div>
+            <h3 class="mb-5 text-xl text-center">Notes:</h3>
+            <p class="border-2 p-5 ">{notes}</p>
+          </div>
+        </div>
       </div>
 
       <button
         onClick={handleAccept}
         class={`${
-          accepted ? 'cursor-not-allowed hover:bg-green-400 opacity-50 ' : null
-        } bg-green-400 hover:bg-green-600 text-white px-4 py-2 rounded-lg w-full my-4 `}
+          accepted ? 'cursor-not-allowed hover:bg-gray-600 opacity-50 ' : null
+        } bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 mb-12  w-full block mx-auto tex-center my-4 text-2xl`}
         disabled={accepted ? 'disabled' : null}
       >
         Accept
