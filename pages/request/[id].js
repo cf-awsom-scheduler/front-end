@@ -54,7 +54,6 @@ function TrialRequestPage({
         })
       )
       .set('Authorization', `Bearer ${process.env.TOKEN}`);
-    console.log(result);
   }
 
   return (

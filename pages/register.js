@@ -16,13 +16,6 @@ const BACK_END_SERVER_URI = process.env.BACK_END_SERVER_URI;
 
 export default function TrialRequest() {
   async function handleSubmit(values) {
-    // const availabilitiesString = values.Availability.reduce(
-    //   (outputString, timeRange) => {
-    //     outputString += JSON.stringify(timeRange);
-    //     return outputString;
-    //   },
-    //   ''
-    // );
     values.Availability = JSON.stringify(values.Availability);
     try {
       await superagent
