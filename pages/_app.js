@@ -1,6 +1,7 @@
 import React from 'react';
 import App, { Container as NextContainer } from 'next/app';
 import Nav from '../components/nav';
+import Footer from '../components/footer';
 import '../styles/index.css';
 
 class MyApp extends App {
@@ -18,7 +19,7 @@ class MyApp extends App {
   constructor(props) {
     super(props);
     this.state = {
-      user: props.pageProps.user
+      user: props.pageProps.user,
     };
   }
 
@@ -27,13 +28,14 @@ class MyApp extends App {
 
     const props = {
       ...pageProps,
-      user: this.state.user
+      user: this.state.user,
     };
 
     return (
       <NextContainer>
         <Nav user={this.state.user} />
         <Component {...props} />
+        <Footer />
       </NextContainer>
     );
   }
