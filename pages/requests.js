@@ -1,15 +1,18 @@
 import React from 'react';
 import superagent from 'superagent';
+import Container from '../components/container';
 
 import TrialRequest from '../components/trial-request';
 
 function TrialRequestsPage({ trialRequests }) {
   return (
-    <>
-      {trialRequests.map(trialRequest => (
-        <TrialRequest key={trialRequest.id} {...trialRequest} />
-      ))}
-    </>
+    <Container>
+      <div class="flex md:flex-row flex-col px-4">
+        {trialRequests.map(trialRequest => (
+          <TrialRequest key={trialRequest.id} {...trialRequest} />
+        ))}
+      </div>
+    </Container>
   );
 }
 
