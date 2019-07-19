@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.5.4",
+    "@mapbox/react-geocoder": "^2.5.0",
     "@zeit/next-css": "^1.0.1",
-    "babel-core": "^6.26.3",
     "babel-jest": "^24.8.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
@@ -19,19 +19,24 @@
     "express": "^4.17.1",
     "express-session": "^1.16.2",
     "formik": "^1.5.8",
+    "moment": "^2.24.0",
     "next": "^9.0.1",
-    "next-cookies": "^1.1.2",
     "passport": "^0.4.0",
     "passport-auth0": "^1.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-map-gl": "^5.0.7",
     "superagent": "^5.1.0",
     "uid-safe": "^2.1.5"
   },
   "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jest": "^24.8.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-test-renderer": "^16.8.6",
     "autoprefixer": "^9.6.1",
     "cssnano": "^4.1.10",
-    "jest": "^24.8.0",
     "postcss-easy-import": "^3.0.0",
     "tailwindcss": "^1.0.5"
   }

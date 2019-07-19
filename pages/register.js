@@ -1,10 +1,12 @@
 import React from 'react';
 import { Formik, Field, FieldArray, Form, ErrorMessage } from 'formik';
+import Link from 'next/link';
 import superagent from 'superagent';
 
 import { businessDays } from '../utils/businessDays';
 import { businessHours } from '../utils/businessHours';
 import { instruments } from '../utils/instruments';
+import { regions } from '../utils/regions';
 
 import validateEmail from '../utils/validateEmail';
 import validateZipCode from '../utils/validateZipCode';
@@ -14,8 +16,16 @@ const BACK_END_SERVER_URI = process.env.BACK_END_SERVER_URI;
 
 export default function TrialRequest() {
   async function handleSubmit(values) {
+    const availabilitiesString = values.Availability.reduce(
+      (outputString, timeRange) => {
+        outputString += JSON.stringify(timeRange);
+        return outputString;
+      },
+      ''
+    );
+    values.Availability = availabilitiesString;
     try {
-      superagent
+      await superagent
         .post(`${BACK_END_SERVER_URI}/trialRequests`)
         .set('Content-Type', 'application/json')
         .send(JSON.stringify(values));
@@ -43,7 +53,7 @@ export default function TrialRequest() {
               <Field
                 style={inputStyle}
                 type="type"
-                name="parentName"
+                name="ParentName"
                 required
               />
             </div>
@@ -51,7 +61,7 @@ export default function TrialRequest() {
               <label>E-mail</label>
               <Field
                 type="email"
-                name="email"
+                name="Email"
                 validate={validateEmail}
                 style={inputStyle}
               />
@@ -63,7 +73,7 @@ export default function TrialRequest() {
               <label>Phone</label>
               <Field
                 type="tel"
-                name="phone"
+                name="Phone"
                 validate={validatePhone}
                 required
                 style={inputStyle}
@@ -74,22 +84,23 @@ export default function TrialRequest() {
             </div>
             <div className="formField">
               <label>Address</label>
-              <Field type="text" name="address" required style={inputStyle} />
+              <Field type="text" name="Address" required style={inputStyle} />
             </div>
             <div className="addressRowTwo">
               <div className="formField">
                 <label>City</label>
-                <Field type="text" name="city" required style={inputStyle} />
+                <Field type="text" name="City" required style={inputStyle} />
               </div>
               <div className="formField">
-                <label>Region</label>
-                <Field type="text" name="region" required style={inputStyle} />
+                <label>State</label>
+                <Field type="text" name="State" style={inputStyle} />
               </div>
+
               <div className="formField">
                 <label>Zip</label>
                 <Field
                   type="number"
-                  name="zip"
+                  name="ZipCode"
                   validate={validateZipCode}
                   style={inputStyle}
                 />
@@ -99,36 +110,54 @@ export default function TrialRequest() {
               </div>
             </div>
             <div className="formField">
+              <label>Region</label>
+              <Field
+                component="select"
+                name="Region"
+                required
+                style={selectStyle}
+              >
+                <option default>Select a Region</option>
+                {regions.map(region => (
+                  <option value={region.region} key={region.id}>
+                    {region.region}
+                  </option>
+                ))}
+              </Field>
+            </div>
+
+            <div className="formField">
               <label>Student Name(s)</label>
-              <Field type="text" name="studentName" style={inputStyle} />
+              <Field type="text" name="StudentName" style={inputStyle} />
             </div>
             <div className="formField">
               <label>Birth Date</label>
-              <Field type="date" name="birthDate" style={inputStyle} />
+              <Field type="date" name="StudentBirthDate" style={inputStyle} />
             </div>
             <div className="formField">
               <label>Instrument</label>
               <Field
-                component="select"
-                name="instruments"
+                name="Instrument"
+                list="instruments"
                 required
-                style={selectStyle}
-              >
-                <option default>Select an instrument</option>
+                style={inputStyle}
+              />
+              <datalist id="instruments">
                 {instruments.map(instrument => (
-                  <option value={instrument}>{instrument}</option>
+                  <option value={instrument.instrument} key={instrument.id} />
                 ))}
-              </Field>
+              </datalist>
             </div>
             <div className="formField">
               <label>Do you have your instrument already?</label>
               <Field
                 component="select"
-                name="ownInstrument"
+                name="HasInstrument"
                 style={selectStyle}
               >
-                <option value="true">yes</option>
-                <option value="false">no</option>
+                <option default>Select</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
                 <option value="assistanceNeeded">
                   I need assistance in purchasing/renting
                 </option>
@@ -137,16 +166,16 @@ export default function TrialRequest() {
 
             <div className="formField">
               <label>Availabilites</label>
-              <FieldArray name="availability">
+              <FieldArray name="Availability">
                 {({ push, remove }) => (
                   <>
-                    {values.availability &&
-                      values.availability.length > 0 &&
-                      values.availability.map((item, index) => (
+                    {values.Availability &&
+                      values.Availability.length > 0 &&
+                      values.Availability.map((item, index) => (
                         <div key={index}>
                           <Field
                             component="select"
-                            name={`availability[${index}].day`}
+                            name={`Availability[${index}].day`}
                             className="app__form_dropdownbox"
                             required
                             style={selectStyle}
@@ -163,8 +192,9 @@ export default function TrialRequest() {
                           <span />
                           <Field
                             component="select"
-                            name={`availability[${index}].fromTime`}
+                            name={`Availability[${index}].fromTime`}
                             style={selectStyle}
+                            required
                           >
                             <option value="">From</option>
                             {businessHours.map(element => (
@@ -176,8 +206,9 @@ export default function TrialRequest() {
                           <span />
                           <Field
                             component="select"
-                            name={`availability[${index}].toTime`}
+                            name={`Availability[${index}].toTime`}
                             style={selectStyle}
+                            required
                           >
                             <option value="">To</option>
                             {businessHours.map(element => (
@@ -194,15 +225,15 @@ export default function TrialRequest() {
                           >
                             ×
                           </button>
-                          <ErrorMessage name={`availability[${index}].day`}>
+                          <ErrorMessage name={`Availability[${index}].day`}>
                             {msg => <div className="field-error">{msg}</div>}
                           </ErrorMessage>
                           <ErrorMessage
-                            name={`availability[${index}].fromTime`}
+                            name={`Availability[${index}].fromTime`}
                           >
                             {msg => <div className="field-error">{msg}</div>}
                           </ErrorMessage>
-                          <ErrorMessage name={`availability[${index}].toTime`}>
+                          <ErrorMessage name={`Availability[${index}].toTime`}>
                             {msg => <div className="field-error">{msg}</div>}
                           </ErrorMessage>
                         </div>
@@ -227,42 +258,43 @@ export default function TrialRequest() {
               <label>Any previous musical experience?</label>
               <Field
                 component="textarea"
-                name="previousExperience"
+                name="Experience"
                 style={inputStyle}
               />
             </div>
 
             <div className="formField">
               <label>Anything else you would like your teacher to know?</label>
-              <Field
-                component="textarea"
-                name="additionnalInfo"
-                style={inputStyle}
-              />
+              <Field component="textarea" name="Notes" style={inputStyle} />
             </div>
-
             <div className="formField">
               <label>How did you hear about us?</label>
-              <Field name="referal" style={inputStyle} />
+              <Field name="Referral" style={inputStyle} />
             </div>
 
             <div className="formField">
               <label>Offer Code</label>
-              <Field name="offerCode" style={inputStyle} />
+              <Field name="OfferCode" style={inputStyle} />
             </div>
-
-            <button type="submit" disabled={isSubmitting}>
+            {/* <Link href="/submission"> */}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="submitButton"
+            >
               Submit
             </button>
+            {/* </Link> */}
           </Form>
         )}
       </Formik>
 
       <style jsx>{`
         @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|PT+Sans&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
         display: flex;
         justify-content: center;
-        font-family: 'Open Sans Condensed', sans-serif;
+        font-family: 'Playfair Display', serif;
         letter-spacing: 1.3px;
 
         label {
@@ -293,6 +325,20 @@ export default function TrialRequest() {
           height: 3em;
           width: 7em;
           font-size: 0.7em;
+          border: solid 1px black;
+        }
+
+        button:hover {
+          background-color: #edf2f7;
+        }
+
+        h1 {
+          font-size: 2em;
+        }
+
+        .submitButton {
+          margin-top: 3em;
+          margin-bottom: 10em;
         }
       `}</style>
     </div>
@@ -304,6 +350,7 @@ const inputStyle = {
   padding: '.5em',
   width: '90%',
   marginBottom: '.8em',
+  border: '1px solid black',
 };
 
 const formStyle = {
