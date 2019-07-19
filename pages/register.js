@@ -6,13 +6,13 @@ import superagent from 'superagent';
 import { businessDays } from '../utils/businessDays';
 import { businessHours } from '../utils/businessHours';
 import { instruments } from '../utils/instruments';
+import { regions } from '../utils/regions';
 
 import validateEmail from '../utils/validateEmail';
 import validateZipCode from '../utils/validateZipCode';
 import validatePhone from '../utils/validatePhone';
 
 const BACK_END_SERVER_URI = process.env.BACK_END_SERVER_URI;
-// const BACK_END_SERVER_URI = 'http://localhost:3000/api';
 
 export default function TrialRequest() {
   async function handleSubmit(values) {
@@ -92,9 +92,10 @@ export default function TrialRequest() {
                 <Field type="text" name="City" required style={inputStyle} />
               </div>
               <div className="formField">
-                <label>Region</label>
-                <Field type="text" name="Region" required style={inputStyle} />
+                <label>State</label>
+                <Field type="text" name="State" style={inputStyle} />
               </div>
+
               <div className="formField">
                 <label>Zip</label>
                 <Field
@@ -109,6 +110,23 @@ export default function TrialRequest() {
               </div>
             </div>
             <div className="formField">
+              <label>Region</label>
+              <Field
+                component="select"
+                name="Region"
+                required
+                style={selectStyle}
+              >
+                <option default>Select a Region</option>
+                {regions.map(region => (
+                  <option value={region.region} key={region.id}>
+                    {region.region}
+                  </option>
+                ))}
+              </Field>
+            </div>
+
+            <div className="formField">
               <label>Student Name(s)</label>
               <Field type="text" name="StudentName" style={inputStyle} />
             </div>
@@ -119,18 +137,16 @@ export default function TrialRequest() {
             <div className="formField">
               <label>Instrument</label>
               <Field
-                component="select"
                 name="Instrument"
+                list="instruments"
                 required
                 style={selectStyle}
-              >
-                <option default>Select an instrument</option>
+              />
+              <datalist id="instruments">
                 {instruments.map(instrument => (
-                  <option value={instrument.instrument} key={instrument.id}>
-                    {instrument.instrument}
-                  </option>
+                  <option value={instrument.instrument} key={instrument.id} />
                 ))}
-              </Field>
+              </datalist>
             </div>
             <div className="formField">
               <label>Do you have your instrument already?</label>
@@ -139,8 +155,9 @@ export default function TrialRequest() {
                 name="HasInstrument"
                 style={selectStyle}
               >
-                <option value="true">yes</option>
-                <option value="false">no</option>
+                <option default>Select</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
                 <option value="assistanceNeeded">
                   I need assistance in purchasing/renting
                 </option>
@@ -259,11 +276,11 @@ export default function TrialRequest() {
               <label>Offer Code</label>
               <Field name="OfferCode" style={inputStyle} />
             </div>
-            <Link href="/submission">
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
-            </Link>
+            {/* <Link href="/submission"> */}
+            <button type="submit" disabled={isSubmitting}>
+              Submit
+            </button>
+            {/* </Link> */}
           </Form>
         )}
       </Formik>

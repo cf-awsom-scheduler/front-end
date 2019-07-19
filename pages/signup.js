@@ -6,7 +6,6 @@ import validateZipCode from '../utils/validateZipCode';
 import { instruments } from '../utils/instruments';
 import { whileStatement } from '@babel/types';
 
-// const BACK_END_SERVER_URI = 'http://localhost:3000/api';
 const BACK_END_SERVER_URI = process.env.BACK_END_SERVER_URI;
 
 export default function SignUp() {
@@ -102,7 +101,7 @@ export default function SignUp() {
               <div className="formField">
                 <label>Region</label>
                 <Field
-                  type="text"
+                  type="select"
                   name="region"
                   required
                   style={addressInputStyle}
