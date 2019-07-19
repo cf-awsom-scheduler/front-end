@@ -30,10 +30,10 @@ const About = () => (
           class="mb-8 rounded-full w-3/4 mx-auto"
         />
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Auctor
-          augue mauris augue neque gravida in fermentum et sollicitudin. Sit
-          amet cursus sit amet dictum sit amet.
+          Morgana is a full-stack software developer with a background in
+          Theatrical Costuming. From costumes to code, she is motivated by the
+          pursuit of excellence and the desire to create and build interesting
+          things.
         </p>
       </div>
     </div>
@@ -47,10 +47,10 @@ const About = () => (
           class="mb-8 rounded-full w-3/4 mx-auto"
         />
         <p c>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Auctor
-          augue mauris augue neque gravida in fermentum et sollicitudin. Sit
-          amet cursus sit amet dictum sit amet.
+          Jesse is a back-end software developer with a background in
+          manufacturing, engineering, customer service, and sales. He enjoys
+          learning new things and exploring technologies and programming
+          languages.
         </p>
       </div>
       <div class="mr-10 flex flex-col items-center">
@@ -60,10 +60,9 @@ const About = () => (
           class="mb-8 rounded-full w-3/4 mx-auto"
         />
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Auctor
-          augue mauris augue neque gravida in fermentum et sollicitudin. Sit
-          amet cursus sit amet dictum sit amet.
+          Software developer and pianist who loves creating and problem solving.
+          Currently a piano teacher at AWSOM. Excited to design innovative and
+          fun applications to solve real-world problems.
         </p>
       </div>
     </div>
