@@ -140,7 +140,7 @@ export default function TrialRequest() {
                 name="Instrument"
                 list="instruments"
                 required
-                style={selectStyle}
+                style={inputStyle}
               />
               <datalist id="instruments">
                 {instruments.map(instrument => (
@@ -277,7 +277,11 @@ export default function TrialRequest() {
               <Field name="OfferCode" style={inputStyle} />
             </div>
             {/* <Link href="/submission"> */}
-            <button type="submit" disabled={isSubmitting}>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="submitButton"
+            >
               Submit
             </button>
             {/* </Link> */}
@@ -287,9 +291,10 @@ export default function TrialRequest() {
 
       <style jsx>{`
         @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|PT+Sans&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
         display: flex;
         justify-content: center;
-        font-family: 'Open Sans Condensed', sans-serif;
+        font-family: 'Playfair Display', serif;
         letter-spacing: 1.3px;
 
         label {
@@ -320,6 +325,20 @@ export default function TrialRequest() {
           height: 3em;
           width: 7em;
           font-size: 0.7em;
+          border: solid 1px black;
+        }
+
+        button:hover {
+          background-color: #edf2f7;
+        }
+
+        h1 {
+          font-size: 2em;
+        }
+
+        .submitButton {
+          margin-top: 3em;
+          margin-bottom: 10em;
         }
       `}</style>
     </div>
@@ -331,6 +350,7 @@ const inputStyle = {
   padding: '.5em',
   width: '90%',
   marginBottom: '.8em',
+  border: '1px solid black',
 };
 
 const formStyle = {
