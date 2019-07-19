@@ -1,0 +1,10 @@
+@startuml
+
+(NextJS BE) --> (Auth0)
+(Auth0) --> (NextJS FE)
+(NextJS BE) <--> (API Server)
+(NextJS BE) <--> (NextJS FE)
+
+(NextJS FE) "address" <--> "lat/long" (Mapbox API)
+
+@enduml
