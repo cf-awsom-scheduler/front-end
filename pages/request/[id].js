@@ -88,7 +88,7 @@ function TrialRequestPage({
         } bg-green-400 hover:bg-green-600 text-white px-4 py-2 rounded-lg w-full my-4 `}
         disabled={accepted ? 'disabled' : null}
       >
-        Accept
+        {accepted ? 'Accpeted' : 'Accept'}
       </button>
     </Container>
   );
