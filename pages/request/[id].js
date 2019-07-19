@@ -61,6 +61,7 @@ function TrialRequestPage({
       <section>
         {latLong[0] && latLong[1] ? (
           <ReactMapGL
+            className="rounded-lg"
             mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
             width="100%"
             height="280px"
