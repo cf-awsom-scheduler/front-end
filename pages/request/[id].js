@@ -139,7 +139,7 @@ function TrialRequestPage({
         } bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 mb-12  w-full block mx-auto tex-center my-4 text-2xl`}
         disabled={accepted ? 'disabled' : null}
       >
-        Accept
+        {accepted ? 'Accepted' : 'Accept'}
       </button>
     </Container>
   );
