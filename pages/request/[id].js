@@ -19,6 +19,7 @@ function TrialRequestPage({
   notes,
   experience,
   availability,
+
 }) {
   const [latLong, setLatLong] = useState([]);
 
@@ -50,11 +51,10 @@ function TrialRequestPage({
       .send(
         JSON.stringify({
           trialRequestId: id,
-          teacherId: '10002',
+          teacherId: '10002'
         })
       )
       .set('Authorization', `Bearer ${process.env.TOKEN}`);
-    console.log(result);
   }
 
   return (
@@ -64,12 +64,14 @@ function TrialRequestPage({
         {studentName}
       </h1>
       <div class="flex justify-around mb-10">
+    
         <section class="w-1/2 mr-10">
           {latLong[0] && latLong[1] ? (
             <ReactMapGL
               mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
               width="100%"
               height="350px"
+
               latitude={latLong[1]}
               longitude={latLong[0]}
               zoom={10}
@@ -111,7 +113,7 @@ function TrialRequestPage({
         } bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 mb-12  w-full block mx-auto tex-center my-4 text-2xl`}
         disabled={accepted ? 'disabled' : null}
       >
-        Accept
+        {accepted ? 'Accepted' : 'Accept'}
       </button>
     </Container>
   );
