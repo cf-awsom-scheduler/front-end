@@ -30,9 +30,13 @@
     "uid-safe": "^2.1.5"
   },
   "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jest": "^24.8.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-test-renderer": "^16.8.6",
     "autoprefixer": "^9.6.1",
     "cssnano": "^4.1.10",
-    "jest": "^24.8.0",
     "postcss-easy-import": "^3.0.0",
     "tailwindcss": "^1.0.5"
   }
