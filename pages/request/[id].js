@@ -16,6 +16,8 @@ function TrialRequestPage({
   city,
   zip,
   studentBirthDate,
+  notes,
+  experience,
 }) {
   const [latLong, setLatLong] = useState([]);
 
@@ -81,6 +83,15 @@ function TrialRequestPage({
           </ReactMapGL>
         ) : null}
       </section>
+      <div>
+        <h3>Experience:</h3>
+        <p>{experience}</p>
+      </div>
+      <div>
+        <h3>Notes:</h3>
+        <p>{notes}</p>
+      </div>
+
       <button
         onClick={handleAccept}
         class={`${

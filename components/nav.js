@@ -37,7 +37,7 @@ const Nav = ({ user }) => {
           <Link href="/requests">
             <a
               href="#responsive-header"
-              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-pink-400 mr-4"
             >
               Requests
             </a>
