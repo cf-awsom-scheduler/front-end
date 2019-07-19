@@ -9,9 +9,10 @@ export const instruments = [
   { id: 7, instrument: 'trombone' },
   { id: 8, instrument: 'oboe' },
   { id: 9, instrument: 'tuba' },
-  { id: 10, instrument: 'percussion' },
+  { id: 10, instrument: 'drums' },
   { id: 11, instrument: 'bass' },
   { id: 12, instrument: 'viola' },
   { id: 13, instrument: 'violin' },
   { id: 14, instrument: 'cello' },
+  { id: 15, instrument: 'bassoon' },
 ];

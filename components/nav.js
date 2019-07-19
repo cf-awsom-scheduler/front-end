@@ -9,7 +9,7 @@ const Nav = ({ user }) => {
   }
 
   return (
-    <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6 mb-8">
+    <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6 mb-8">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
         <Link href="/">
           <img src="/static/assets/images/logo.png" class="w-32" />
@@ -17,7 +17,7 @@ const Nav = ({ user }) => {
       </div>
       <div class="block lg:hidden">
         <button
-          class="flex items-center px-3 py-2 border rounded text-white border-white hover:text-white hover:border-white"
+          class="flex items-center px-3 py-2 border rounded text-white border-white hover:text-gray-400 hover:border-gray-400"
           onClick={handleClick}
         >
           <svg
@@ -39,7 +39,7 @@ const Nav = ({ user }) => {
           <Link href="/requests">
             <a
               href="#responsive-header"
-              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-400 text-xl mr-6"
             >
               Requests
             </a>
@@ -47,7 +47,7 @@ const Nav = ({ user }) => {
           <Link href="/profile">
             <a
               href="#responsive-header"
-              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-400 text-xl mr-6"
             >
               Profile
             </a>
@@ -55,7 +55,7 @@ const Nav = ({ user }) => {
           <Link href="/about">
             <a
               href="#responsive-header"
-              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-400 text-xl mr-6"
             >
               About
             </a>
@@ -63,7 +63,7 @@ const Nav = ({ user }) => {
           <Link href="/logout">
             <a
               href="#responsive-header"
-              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4"
+              class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-400 text-xl mr-6"
             >
               Logout
             </a>
