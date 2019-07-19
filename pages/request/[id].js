@@ -15,7 +15,7 @@ function TrialRequestPage({
   address,
   city,
   zip,
-  studentBirthDate,
+  studentBirthDate
 }) {
   const [latLong, setLatLong] = useState([]);
 
@@ -46,11 +46,10 @@ function TrialRequestPage({
       .send(
         JSON.stringify({
           trialRequestId: id,
-          teacherId: '10002',
+          teacherId: '10002'
         })
       )
       .set('Authorization', `Bearer ${process.env.TOKEN}`);
-    console.log(result);
   }
 
   return (
