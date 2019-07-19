@@ -11,7 +11,9 @@ const Nav = ({ user }) => {
   return (
     <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6 mb-8">
       <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <img src="/static/assets/images/logo.png" class="w-32" />
+        <Link href="/">
+          <img src="/static/assets/images/logo.png" class="w-32" />
+        </Link>
       </div>
       <div class="block lg:hidden">
         <button
