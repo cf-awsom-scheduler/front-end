@@ -4,8 +4,7 @@ import Link from 'next/link';
 function TrialRequest({ id, studentName, instrument, city }) {
   return (
     <Link href="request/[id]" as={`/request/${id}`}>
-      {/* <div class="max-w-sm w-full lg:max-w-full lg:flex mb-4"> */}
-      <div class="w-full md:w-1/2 md:mx-4 mx-0 mb-4 border border-pink-400 hover:bg-pink-100 rounded-lg p-8 flex flex-col justify-between leading-normal cursor-pointer">
+      <div class="w-full flex-grow md:w-1/5 md:mx-4 mx-0 mb-4 border border-pink-400 hover:bg-pink-100 rounded-lg p-8 flex flex-col justify-between leading-normal cursor-pointer">
         <div class="mb-8">
           <div class="text-gray-900 font-bold text-xl mb-2">{studentName}</div>
           <p class="text-gray-700 text-base">{city}</p>
@@ -16,18 +15,8 @@ function TrialRequest({ id, studentName, instrument, city }) {
           </span>
         </div>
       </div>
-      {/* </div> */}
     </Link>
   );
 }
 
-{
-  /* // <Link href="request/[id]" as={`/request/${id}`}>
-//   <section>
-//     <h2>{studentName}</h2>
-//     {instrument}
-   
-//   </section>
-// </Link> */
-}
 export default TrialRequest;

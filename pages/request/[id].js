@@ -61,6 +61,7 @@ function TrialRequestPage({
       <section>
         {latLong[0] && latLong[1] ? (
           <ReactMapGL
+            className="rounded-lg"
             mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
             width="100%"
             height="280px"
@@ -87,7 +88,7 @@ function TrialRequestPage({
         } bg-green-400 hover:bg-green-600 text-white px-4 py-2 rounded-lg w-full my-4 `}
         disabled={accepted ? 'disabled' : null}
       >
-        Accept
+        {accepted ? 'Accepted' : 'Accept'}
       </button>
     </Container>
   );
