@@ -1,6 +1,7 @@
 import React from 'react';
 import superagent from 'superagent';
 import Container from '../components/container';
+import Footer from '../components/footer';
 
 import TrialRequest from '../components/trial-request';
 

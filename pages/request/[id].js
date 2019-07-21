@@ -19,7 +19,6 @@ function TrialRequestPage({
   notes,
   experience,
   availability,
-
 }) {
   const [latLong, setLatLong] = useState([]);
 
@@ -51,7 +50,7 @@ function TrialRequestPage({
       .send(
         JSON.stringify({
           trialRequestId: id,
-          teacherId: '10002'
+          teacherId: '10002',
         })
       )
       .set('Authorization', `Bearer ${process.env.TOKEN}`);
@@ -59,19 +58,17 @@ function TrialRequestPage({
 
   return (
     <Container>
-      {/* <h1>{availability}</h1> */}
+      <h1>{availability[0].day}</h1>
       <h1 class="text-3xl text-center font-bold tracking-wider mb-10 font-mono tracking-wider">
         {studentName}
       </h1>
-      <div class="flex justify-around mb-10">
-    
-        <section class="w-1/2 mr-10">
+      <div class="flex flex-col justify-around mb-10">
+        <section class="w-full mr-10">
           {latLong[0] && latLong[1] ? (
             <ReactMapGL
               mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
               width="100%"
               height="350px"
-
               latitude={latLong[1]}
               longitude={latLong[0]}
               zoom={10}
@@ -90,18 +87,47 @@ function TrialRequestPage({
         </section>
 
         <div class="flex flex-col justify-around mb-10 mr-10">
-          <div class="border-2 p-3  md:w-40 text-center">{city}</div>
-          <div class="border-2 p-3  md:w-40 text-center">{instrument}</div>
-          <div class="border-2 p-3  md:w-40 text-center">{age} years old</div>
-        </div>
-        <div class="flex flex-col justify-around">
-          <div>
-            <h3 class="mb-5 text-xl text-center">Experience:</h3>
-            <p class="border-2 p-5 ">{experience}</p>
+          <div class="flex justify-between mt-10">
+            <div>
+              <h3 class="font-mono text-center text-2xl">City</h3>
+              <div class="border-2 p-3  md:w-40 text-center mt-3">{city}</div>
+            </div>
+            <div>
+              <h3 class="font-mono text-center text-2xl">Instrument</h3>
+              <div class="border-2 p-3  md:w-40 mt-3 text-center">
+                {instrument}
+              </div>
+            </div>
+            <div>
+              <h3 class="font-mono text-center text-2xl">Age</h3>
+              <div class="border-2 p-3  md:w-40 mt-3 text-center">
+                {age} years old
+              </div>
+            </div>
           </div>
-          <div>
-            <h3 class="mb-5 text-xl text-center">Notes:</h3>
-            <p class="border-2 p-5 ">{notes}</p>
+        </div>
+        <div class="flex flex-col justify-center items-center mb-10">
+          <h2 class="font-mono text-2xl mb-4">Availability</h2>
+          {JSON.parse(availability).map(availability => (
+            <h2 class="mb-6">
+              {`${availability.day} ${moment(
+                `${availability.fromTime}`,
+                'HH'
+              ).format('h:mm a')} - ${moment(
+                `${availability.toTime}`,
+                'HH'
+              ).format('h:mm a')}`}
+            </h2>
+          ))}
+        </div>
+        <div class="flex flex-col justify-between">
+          <div class="mb-10">
+            <h3 class="mb-5 text-xl text-center font-mono">Experience</h3>
+            <p class="border-2 p-5 text-center ">{experience}</p>
+          </div>
+          <div class="mb-10">
+            <h3 class="mb-5 text-xl text-center font-mono">Notes</h3>
+            <p class="border-2 p-5 text-center">{notes}</p>
           </div>
         </div>
       </div>
