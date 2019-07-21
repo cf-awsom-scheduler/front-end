@@ -1,0 +1,18 @@
+export const instruments = [
+  { id: 0, instrument: 'piano' },
+  { id: 1, instrument: 'voice' },
+  { id: 2, instrument: 'guitar' },
+  { id: 3, instrument: 'flute' },
+  { id: 4, instrument: 'clarinet' },
+  { id: 5, instrument: 'saxophone' },
+  { id: 6, instrument: 'trumpet' },
+  { id: 7, instrument: 'trombone' },
+  { id: 8, instrument: 'oboe' },
+  { id: 9, instrument: 'tuba' },
+  { id: 10, instrument: 'drums' },
+  { id: 11, instrument: 'bass' },
+  { id: 12, instrument: 'viola' },
+  { id: 13, instrument: 'violin' },
+  { id: 14, instrument: 'cello' },
+  { id: 15, instrument: 'bassoon' },
+];
