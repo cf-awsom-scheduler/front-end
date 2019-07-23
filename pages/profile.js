@@ -8,7 +8,7 @@ function Profile({ user }) {
         alt={user.displayName}
         class="rounded-full mx-auto w-1/5 mt-12 mb-6"
       />
-      <div class="w-1/3 mx-auto m">
+      <div class="md:w-1/3 w-full mx-auto m">
         <h2 class="text-center text-3xl font-mono tracking-wider">
           {user.displayName}
         </h2>
