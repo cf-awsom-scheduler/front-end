@@ -86,7 +86,7 @@ function TrialRequestPage({
           ) : null}
         </section>
 
-        <div class="flex flex-col justify-around mb-10 mr-10">
+        <div class="flex flex-col justify-around mb-10">
           <div class="flex justify-between mt-10">
             <div>
               <h3 class="font-mono text-center text-2xl">City</h3>
@@ -100,9 +100,7 @@ function TrialRequestPage({
             </div>
             <div>
               <h3 class="font-mono text-center text-2xl">Age</h3>
-              <div class="border-2 p-3  md:w-40 mt-3 text-center">
-                {age} years old
-              </div>
+              <div class="border-2 p-3  md:w-40 mt-3 text-center">{age}</div>
             </div>
           </div>
         </div>
